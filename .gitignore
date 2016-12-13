@@ -1,0 +1,8 @@
+node_modules/
+npm-debug.log
+.DS_Store
+<<<<<<< HEAD
+dist/
+=======
+.docx
+>>>>>>> 7b7aea192d4687c2fa4ce21e9e58625d06f2ce27
