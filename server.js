@@ -47,33 +47,6 @@ app.get('/api/jobs', function(req, res) {
   });
 });
 
-
-//get a list of all the businesses
-app.get('/api/business', function(req, res) {
-  db.collection("business").find({}).toArray(function(err, docs) {
-    assert.equal(err, null);
-    res.json(docs);
-  });
-});
-
-
-/* add or update a business
-If the business (based on the name field) does not exist, it is created.
-If the business already exists, all fields are changed to match the values give.
-
-This means that even if you update one filed, you must send back the original values of all the other fields.
-*/
-app.put('/api/business', function(req, res) {
-  db.collection("business").updateOne({name: req.body.name}, {name: req.body.name, owner: req.body.owner, service: req.body.service, email: req.body.email, address: req.body.address, phone: req.body.phone},{upsert: true}, function(err, result){
-    console.log(req.body.name);//logging output for debugging purposes
-    console.log(req.body.owner);
-    console.log(req.body.phone);
-
-    if (err) throw err;
-    res.json(200);
-  });
-})
-
 //this is the request sent from the "submit" button on the user form
 app.put('/api/volunteer', function(req, res) {
 	/*
@@ -140,58 +113,6 @@ app.put('/api/volunteer', function(req, res) {
   }
   res.json(200)
 })
-
-
-
-
-/*get a volunteer by providing their email address
-returns an array with (hopefully) one element.
-*/
-app.get('/api/volunteer/:email', function(req, res) {
-  //split prefix off of email address
-  var emailTokens = req.params.email.split("@");
-  console.log(emailTokens);//for debugging
-  db.collection("volunteers").find({id: emailTokens[0]}).toArray(function(err, volunteers) {
-    assert.equal(err, null);
-    res.json(volunteers);
-  });
-})
-
-
-
-app.get('/api/volunteer/:email/jobsIwant', function(req, res) {
-  //split prefix off of email address
-  var emailTokens = req.params.email.split("@");
-  console.log(emailTokens);//for debugging
-  db.collection("volunteers").find({id: emailTokens[0]}).toArray(function(err, volunteers) {
-    assert.equal(err, null);
-    res.json(volunteers);
-  });
-})
-
-
-/*get a business by providing its name address
-returns an array with (hopefully) one element.
-I'me using the prefix of the owner's personal email address as a way to identify the business.
-This way we can update the name later if necessary and it gives us a short way to refer to the business.
-
-*/
-app.get('/api/business/:ownerEmail', function(req, res) {
-  //split prefix off of email address
-  var emailTokens = req.params.ownerEmail.split("@");
-  console.log(emailTokens);//for debugging
-  db.collection("business").find({ownerID: emailTokens[0]}).toArray(function(err, businesses) {
-    assert.equal(err, null);
-    res.json(businesses);
-  });
-})
-
-
-
-
-
-
-
 
 app.post('/api/jobs', function(req, res) {
         var newJob = {
