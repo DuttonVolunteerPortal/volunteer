@@ -7,19 +7,39 @@ import BusinessInfo from './userBusinessInfo.js'
 
 module.exports = React.createClass({
   getInitialState: function(){
-    return {data: []};
+    return {data: [],
+				jobsChecked: [],
+				email: '',
+				name: '',
+				businessInfo: ''};
   },
-  handleContactInfo: function(user) {
-	  
+  handleNameChange: function(e) {
+		this.setState({name: e});
   },
-  handleJobsChecked: function(user) {
-	  
+  handleEmailChange: function(e) {
+		this.setState({email: e});
   },
-  handleBusinessInfo: function(user) {
-	  
+  toggleCheckbox: function (e) {
+	  var newJobsChecked = this.state.jobsChecked
+	  console.log(e)
+	if (newJobsChecked.includes(e)) {
+		console.log("removing")
+		var index = newJobsChecked.indexOf(e);
+		if (index > -1) {
+			newJobsChecked.splice(index, 1);
+		}
+	}
+	else{
+		console.log("adding")
+		newJobsChecked.push(e);
+	}
+	this.setState({jobsChecked: newJobsChecked})
+  },
+  handleBusinessInfoChange: function(e) {
+		this.setState({businessInfo: e});
   },
   handleUserSubmit: function(user) {
-	  
+	  console.log(this.state)
   },
   
   // Use to AJAX to get jobs from the server
@@ -46,11 +66,13 @@ module.exports = React.createClass({
     return (
       <div className="userBox" >
         <h1>Volunteer Submission Form</h1>
-        <ContactInfo onUserSubmit={this.handleContactInfo} />
+        <ContactInfo onNameChange={this.handleNameChange} onEmailChange={this.handleEmailChange} />
 		<div><strong>Check all that you are able to assist with:</strong></div>
-		<CategoryList data={this.state.data} />
-		<BusinessInfo onBusinessSubmit={this.handleBusinessSubmit} />
-		<input className="ui-button ui-widget ui-corner-all" type="submit" value="Submit" /> //This won't work; it's not in a form.
+		<CategoryList data={this.state.data} toggleCheckBox={this.toggleCheckbox} />
+		<BusinessInfo onBusinessSubmit={this.handleBusinessInfoChange} />
+		<form className="submitForm" onSubmit={this.handleUserSubmit}>
+            <input className="ui-button ui-widget ui-corner-all" type="submit" value="Submit" />
+        </form>
       </div>
     );
   }

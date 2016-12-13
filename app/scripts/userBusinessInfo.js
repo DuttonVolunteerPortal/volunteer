@@ -7,7 +7,9 @@ module.exports = React.createClass({
 		return {name: '', email: ''};
 	},
 	handleBodyChange: function(e) {
-		this.setState({name: e.target.value});
+		var businessInfo = e.target.value;
+		this.setState({businessInfo: e.target.value});
+		this.props.onBusinessSubmit(businessInfo);
 	},
 	render: function() {
 		return (
@@ -15,7 +17,7 @@ module.exports = React.createClass({
 				<strong>Business Information (if applicable)</strong>
 				<form className="businessInfo" onSubmit={this.handleSubmit}>
 					<input className="ui-widget ui-corner-all" type="text"
-						value={this.state.name} onChange={this.handleBodyChange}
+						value={this.state.businessInfo} onChange={this.handleBodyChange}
 					/>
 				</form>
 			</div>
