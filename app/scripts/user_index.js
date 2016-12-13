@@ -8,6 +8,6 @@ import '../css/base.css';
 	
  		
  ReactDOM.render(		
- 	<UserBox url="/api/jobs" pollInterval={2000}/>,		
+ 	<UserBox url="/api/jobs" put_url="/api/volunteer" pollInterval={2000}/>,		
  	document.getElementById('content')		
  ); 

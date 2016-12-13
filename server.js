@@ -18,6 +18,10 @@ curl -X PUT http://localhost:3000/api/business -d '{"name" : "Kastner Konstructi
 
 */
 
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
 
 
 app.set('port', (process.env.PORT || 3000));
@@ -70,36 +74,71 @@ app.put('/api/business', function(req, res) {
   });
 })
 
-/*add or update a volunteer
-If the volunteer (based on the id field, the prefix of their email address) does not exist, they are created.
-If the volunteer already exists, all fields are changed to match the values give.
-This means that even if you update one field, you must send back the original values of all the other fields.
-*/
-
+//this is the request sent from the "submit" button on the user form
 app.put('/api/volunteer', function(req, res) {
-  var jobsIWant = req.body.jobsIWant;
-  //split prefix off of email address
-  var emailTokens = req.body.email.split("@");
-  console.log(emailTokens);//for debugging purposes
+	/*
+		req.body: {
+			jobsChecked: []
+			email: ''
+			name: ''
+			businessInfo: ''
+		}
+  */
+	var previousJobs = []
+  var jobsToAdd = []
+	//first goal: add person to jobsChecked
+  if (typeof req.body["jobsChecked"] != 'undefined') {
+    	db.collection("job").find({ "workers" : { "$in" : [req.body.name]} }).toArray(function(err, jobs) {
 
-//remove the volunteer from the jobs they unchecked.
-  db.collection("job").updateMany({ title: { $nin: jobsIWant } }, {$pullAll: { workers: [req.body.volunteerName] } }, function(err, result){
-    if (err) throw err;
-  });
+      for (var job of jobs) {
+        previousJobs.push(job.title)
+      }
 
-//add the volunteer to the jobs they checked
-  db.collection("job").updateMany({ title: { $in: jobsIWant } }, {$push: { workers: req.body.volunteerName } }, function(err, result){
-    if (err) throw err;
-  });
-//update the volunteer's info.
-  db.collection("volunteers").updateOne({id: emailTokens[0]}, {id: emailTokens[0], email: req.body.email, name: req.body.volunteerName, phone: req.body.phone, jobsIWant: jobsIWant}, {upsert: true}, function(err, result){
-    console.log(req.body.email);//logging output for debugging purposes
-    console.log(req.body.volunteerName);
-    console.log(req.body.jobsIWant);
+      jobsToAdd = req.body.jobsChecked.diff(previousJobs)
 
-    if (err) throw err;
-    res.json(200);
-  });
+      for (var job of jobsToAdd) {
+          db.collection("job").update({"title" : job}, { $push: { "workers" : req.body.name}})
+      }
+
+      //second goal: update person
+      var emailTokens = req.body.email.split("@")
+
+      var volunteer
+
+      if (req.body.email != '') {
+        volunteer = {
+          name : req.body.name,
+          email : req.body.email,
+          id : emailTokens[0],
+          jobsDesired : previousJobs.concat(jobsToAdd)
+        } 
+      } else {
+        volunteer = {
+          name : req.body.name,
+          id : emailTokens[0],
+          jobsDesired : previousJobs.concat(jobsToAdd)
+        } 
+      }
+
+      db.collection("volunteers").update({"id" : volunteer.id}, volunteer, {upsert: true})
+    })
+  }
+
+
+
+
+  ///third goal: add in business info
+  if (req.body.businessInfo != '') {
+      //must update business info
+      var businessObject = {
+        owner_name : req.body.name,
+        email : req.body.email,
+        businessDescription : req.body.businessInfo
+      }
+
+      db.collection("business").update({"name" : businessObject.owner_name}, businessObject, {upsert: true})
+  }
+  res.json(200)
 })
 
 
