@@ -39,7 +39,19 @@ module.exports = React.createClass({
 		this.setState({businessInfo: e});
   },
   handleUserSubmit: function(user) {
-	  console.log(this.state)
+    $.ajax({
+      url: this.props.put_url,
+      dataType: 'json',
+      type: 'PUT',
+      data: this.state
+    })
+    .done(function(data){
+      //fill in
+    }.bind(this))
+    .fail(function(xhr, status, err) {
+      //fill in state
+      console.error(this.props.url, status, err.toString());
+    }.bind(this));
   },
   
   // Use to AJAX to get jobs from the server
@@ -72,8 +84,8 @@ module.exports = React.createClass({
 		<BusinessInfo onBusinessSubmit={this.handleBusinessInfoChange} />
 		<form className="submitForm" onSubmit={this.handleUserSubmit}>
             <input className="ui-button ui-widget ui-corner-all" type="submit" value="Submit" />
-        </form>
-      </div>
+    </form>
+    </div>
     );
   }
 });
