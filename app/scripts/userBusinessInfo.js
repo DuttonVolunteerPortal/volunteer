@@ -16,9 +16,7 @@ module.exports = React.createClass({
 			<div>
 				<strong>Business Information (if applicable)</strong>
 				<form className="businessInfo" onSubmit={this.handleSubmit}>
-					<input className="ui-widget ui-corner-all" type="text"
-						value={this.state.businessInfo} onChange={this.handleBodyChange}
-					/>
+					<textarea name="info" value={this.state.businessInfo} onChange={this.handleBodyChange}></textarea>				
 				</form>
 			</div>
 		);

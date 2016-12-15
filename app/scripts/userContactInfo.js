@@ -19,10 +19,10 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<form className="contactInfo">
-				<input className="ui-widget ui-corner-all" type="text" placeholder="Full Name"
+				<input className="ui-widget ui-corner-all" type="text" name="contactinfo" placeholder="Full Name"
 					value={this.state.name} onChange={this.handleNameChange}
 				/>
-				<input className="ui-widget ui-corner-all" type="text" placeholder="Email"
+				<input className="ui-widget ui-corner-all" type="email" name="contactinfo" placeholder="Email"
 					value={this.state.email} onChange={this.handleEmailChange}
 				/>
 			</form>
