@@ -7,10 +7,28 @@ body {
     padding: 30px;
 }
 
-input[type="text"] {
-    width: 150px;
+input[name="contactinfo"] {
+    width: 200px;
     height: 30px;
+	padding: 5px 5px;
     margin-bottom: 10px;
+	background-color: #f8f8f8;
+	box-sizing: border-box;
+    border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+textarea {
+    width: 40%;
+    height: 150px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
 }
 
 input[type="submit"] {
@@ -20,6 +38,10 @@ input[type="submit"] {
 }
 
 input[type="checkbox"] + label {
+	font-size: 16px;
+}
+
+input[type="checkbox"]:checked + label {
 	font-weight: bold;
 	font-size: 16px;
 }
@@ -68,11 +90,22 @@ h4 {
     font-size: 1.2em;
 }
 
-p, ul {
-    margin: 15px 0;
+p {
+    margin: 5px 0;
+    text-indent: 25px;
+	font-size: 14px;
+	font-style: italic;
 }
 
 ul {
     padding-left: 30px;
+	margin: 15px 0;
+}
+
+hr {
+	border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 

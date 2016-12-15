@@ -91,6 +91,7 @@ module.exports = React.createClass({
         <ContactInfo onNameChange={this.handleNameChange} onEmailChange={this.handleEmailChange} />
 		<div><strong>Check all that you are able to assist with:</strong></div>
 		<CategoryList data={this.state.data} toggleCheckBox={this.toggleCheckbox} />
+		<br />
 		<BusinessInfo onBusinessSubmit={this.handleBusinessInfoChange} />
 		<form className="submitForm" onSubmit={this.handleUserSubmit}>
             <input className="ui-button ui-widget ui-corner-all" type="submit" value="Submit" />

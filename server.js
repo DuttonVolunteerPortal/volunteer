@@ -70,7 +70,7 @@ app.put('/api/volunteer', function(req, res) {
       jobsToAdd = req.body.jobsChecked.diff(previousJobs)
 
       for (var job of jobsToAdd) {
-          db.collection("job").update({"title" : job}, { $push: { "workers" : req.body.name}})
+          db.collection("job").update({"title" : job}, { $push: { "workers" : req.body.name.trim()}})
       }
 
       //second goal: update person
@@ -80,8 +80,8 @@ app.put('/api/volunteer', function(req, res) {
 
       if (req.body.email != '') {
         volunteer = {
-          name : req.body.name,
-          email : req.body.email,
+          name : req.body.name.trim(),
+          email : req.body.email.trim(),
           id : emailTokens[0],
           jobsDesired : previousJobs.concat(jobsToAdd)
         } 
@@ -104,9 +104,9 @@ app.put('/api/volunteer', function(req, res) {
   if (req.body.businessInfo != '') {
       //must update business info
       var businessObject = {
-        owner_name : req.body.name,
-        email : req.body.email,
-        businessDescription : req.body.businessInfo
+        owner_name : req.body.name.trim(),
+        email : req.body.email.trim(),
+        businessDescription : req.body.businessInfo.trim()
       }
 
       db.collection("business").update({"name" : businessObject.owner_name}, businessObject, {upsert: true})
