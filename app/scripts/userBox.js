@@ -46,10 +46,10 @@ module.exports = React.createClass({
       data: this.state
     })
     .done(function(data){
-      //fill in
+      alert("Thank you! Your data has succesfully been entered into the database");
     }.bind(this))
     .fail(function(xhr, status, err) {
-      //fill in state
+      alert("There was a problem. Data was not succesfully entered.");
       console.error(this.props.url, status, err.toString());
     }.bind(this));
   },
