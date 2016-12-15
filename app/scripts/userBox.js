@@ -39,20 +39,30 @@ module.exports = React.createClass({
 		this.setState({businessInfo: e});
   },
   handleUserSubmit: function(user) {
-    $.ajax({
-      url: this.props.put_url,
-      dataType: 'json',
-      type: 'PUT',
-      data: this.state
-    })
-    .done(function(data){
-      alert("Thank you! Your data has succesfully been entered into the database");
-    }.bind(this))
-    .fail(function(xhr, status, err) {
-      alert("There was a problem. Data was not succesfully entered.");
-      console.error(this.props.url, status, err.toString());
-    }.bind(this));
-  },
+	  user.preventDefault();
+	  
+	  var email = this.state.email.trim();
+	  var name = this.state.name.trim();
+	  if (!email || !name || this.state.jobsChecked.length == 0) {
+		  alert("Please be sure to fill out your name, email, and check at least one job.");
+	  }
+	  else {
+	  
+		$.ajax({
+			url: this.props.put_url,
+			dataType: 'json',
+			type: 'PUT',
+			data: this.state
+		})
+		.done(function(data){
+			alert("Thank you! Your data has succesfully been entered into the database.");
+		}.bind(this))
+		.fail(function(xhr, status, err) {
+			alert("There was a problem. Data was not succesfully entered.");
+			console.error(this.props.url, status, err.toString());
+		}.bind(this));
+	  }
+	},
   
   // Use to AJAX to get jobs from the server
   loadJobsFromServer: function() {
