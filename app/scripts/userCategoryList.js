@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import Remarkable from 'remarkable';
-
+import styles from '../css/base.css';
 import JobCategory from './userJobCategory';
 
 module.exports = React.createClass({
@@ -10,12 +10,12 @@ module.exports = React.createClass({
         var jobNodes = this.props.data.map(function(job) {
             return (
                 <JobCategory id={job.id} title={job.title} key={job.id} toggleCheckBox={toggleCheckBox}>
-                    {job.description}				
+                    {job.description}
                 </JobCategory>
             );
         });
         return (
-            <div className="categoryList">
+            <div className={styles.volunteerCategoryList}>
                 {jobNodes}
             </div>
         );
