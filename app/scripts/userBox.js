@@ -8,21 +8,28 @@ import BusinessInfo from './userBusinessInfo.js'
 import styles from '../css/base.css';
 
 module.exports = React.createClass({
+
+  // Get the initial state of the React class
   getInitialState: function(){
-    return {data: [],
-				data1: [],
+    return {	data1: [],
 				data2: [],
 				jobsChecked: [],
 				email: '',
 				name: '',
 				businessInfo: ''};
   },
+
+  // Handle if the name changes
   handleNameChange: function(e) {
 		this.setState({name: e});
   },
+
+  // Handle if the email changes
   handleEmailChange: function(e) {
 		this.setState({email: e});
   },
+
+  // Toggle check on the checkbox for each job
   toggleCheckbox: function (e) {
 	  var newJobsChecked = this.state.jobsChecked
 	  console.log(e)
@@ -39,9 +46,13 @@ module.exports = React.createClass({
 	}
 	this.setState({jobsChecked: newJobsChecked})
   },
+
+  // Handle if the busienss info changes
   handleBusinessInfoChange: function(e) {
 		this.setState({businessInfo: e});
   },
+
+  // Use AJAX to submit the form to the server
   handleUserSubmit: function(user) {
 	  user.preventDefault();
 	  
@@ -89,7 +100,8 @@ module.exports = React.createClass({
         this.loadJobsFromServer();
         setInterval(this.loadJobsFromServer, this.props.pollInterval);
     },
-	
+  
+  // Render method for this React class
   render: function() {
     return (
 	<div className={styles.userBox} >
@@ -99,11 +111,9 @@ module.exports = React.createClass({
 			<CategoryList data2={this.state.data2} toggleCheckBox={this.toggleCheckbox} />
 		</div>
 		<BusinessInfo onBusinessSubmit={this.handleBusinessInfoChange} />
-		<br />
 		<form className={styles.submitForm} onSubmit={this.handleUserSubmit}>
-            <input className={styles.button} type="submit" value="Submit" />
+            <input className={styles.button} type="submit" value="Submit All" />
 		</form>
-		<br />
     </div>
     );
   }
