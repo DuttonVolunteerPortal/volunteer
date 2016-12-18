@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import styles from '../css/base.css';
+
 module.exports = React.createClass({
 	
 	getInitialState: function() {
@@ -18,7 +20,9 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		return (
-			<form className="contactInfo">
+			<form className={styles.userContactInfo}>
+				<strong>Please enter your full name and email address:</strong>
+				<br />
 				<input className="ui-widget ui-corner-all" type="text" name="contactinfo" placeholder="Full Name"
 					value={this.state.name} onChange={this.handleNameChange}
 				/>
