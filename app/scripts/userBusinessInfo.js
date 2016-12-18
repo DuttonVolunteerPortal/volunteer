@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import styles from '../css/base.css';
+
 module.exports = React.createClass({
 	
 	getInitialState: function() {
@@ -13,12 +15,11 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		return (
-			<div>
-				<strong>Business Information (if applicable)</strong>
-				<form className="businessInfo" onSubmit={this.handleSubmit}>
-					<textarea name="info" value={this.state.businessInfo} onChange={this.handleBodyChange}></textarea>				
-				</form>
-			</div>
+			<form className={styles.userBusinessInfo} onSubmit={this.handleSubmit}>
+				<strong>Business Information (if applicable):</strong>
+				<br />
+				<textarea name="info" value={this.state.businessInfo} onChange={this.handleBodyChange}></textarea>				
+			</form>
 		);
 	}
 });
