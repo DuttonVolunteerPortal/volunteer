@@ -5,6 +5,8 @@ import styles from '../css/base.css';
 import JobCategory from './userJobCategory';
 
 module.exports = React.createClass({
+
+	// Render method for this React class
 	render: function() {
 		var toggleCheckBox = this.props.toggleCheckBox;
 		
@@ -24,6 +26,7 @@ module.exports = React.createClass({
 			</div>
         );
 		}
+		
 		else if (this.props.data2 !== undefined) {
 			var jobNodes = this.props.data2.map(function(job) {
 				return (

@@ -1,3 +1,10 @@
+/*
+ * base.css is the main stylesheet for the Dutton Christian School Volunteer Submission form website
+ *      Created by: Ethan Clark, Ben Kastner, Mitch Stark, Kyle Reitsma;
+ *      Fall 2016 @ Calvin College
+ *      CS 336 Final Project
+ */
+
 body {
     background: #d3d3d3;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -103,10 +110,6 @@ ul {
 	margin: 15px 0;
 }
 
-.userBox {
-	
-}
-
 .jobColumns {
 	display: flex;
 }
@@ -126,7 +129,6 @@ ul {
 	border-right: 0;
 	float: left;
 	width: 50%;
-    /*flex: 1 1 40%;*/
 }
 
 .volunteerCategoryList2 {
@@ -137,7 +139,6 @@ ul {
 	border-left: 0;
 	float: left;
 	width: 50%;
-    /*flex: 1 1 40%;*/
 }
 
 .userBusinessInfo {
@@ -145,11 +146,15 @@ ul {
     padding: 15px;
     margin: 0px;
     border: 2px solid #000;
-    /*flex: 1 1 40%;*/
 }
 
 .submitForm {
 	text-align: center;
+    background-color: #fdf7ef;
+    border: 2px solid #000;
+    padding: 15px;
+    margin: 0px;
+
 }
 
 .button {
@@ -177,7 +182,3 @@ footer {
     font-weight: italic;
     text-align: left;
 }
-
-
-
-
