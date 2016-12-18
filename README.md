@@ -10,3 +10,5 @@ to add a way for an admin to add new volunteer categories and to view individual
 The team members for this project are Ethan Clark, Benjamin Kastner, Kyle Reitsma, and Mitch Stark.
 
 The design.md file can be found in the project directory in this repo.
+
+Find the app at: https://dutton-volunteer-portal.herokuapp.com/
