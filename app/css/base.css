@@ -1,5 +1,12 @@
+/*
+ * base.css is the main stylesheet for the Dutton Christian School Volunteer Submission form website
+ *      Created by: Ethan Clark, Ben Kastner, Mitch Stark, Kyle Reitsma;
+ *      Fall 2016 @ Calvin College
+ *      CS 336 Final Project
+ */
+
 body {
-    background: #fff;
+    background: #d3d3d3;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     line-height: 1.7;
@@ -19,7 +26,8 @@ input[name="contactinfo"] {
 }
 
 textarea {
-    width: 40%;
+    max-width: 550px;
+	width: 100%;
     height: 150px;
     padding: 5px 5px;
     box-sizing: border-box;
@@ -34,7 +42,7 @@ textarea {
 input[type="submit"] {
     width: auto;
     max-width: 1280px;
-    display: inline; 
+    display: inline;
 }
 
 input[type="checkbox"] + label {
@@ -102,10 +110,75 @@ ul {
 	margin: 15px 0;
 }
 
-hr {
-	border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+.jobColumns {
+	display: flex;
 }
 
+.userContactInfo {
+	background: #fdf7ef;
+    padding: 15px;
+    margin: 0px;
+    border: 2px solid #000;
+}
+
+.volunteerCategoryList1 {
+    background: #add8e6;
+    padding: 15px;
+    margin: 0px;
+    border: 2px solid #000;
+	border-right: 0;
+	float: left;
+	width: 50%;
+}
+
+.volunteerCategoryList2 {
+    background: #add8e6;
+    padding: 15px;
+    margin: 0px;
+    border: 2px solid #000;
+	border-left: 0;
+	float: left;
+	width: 50%;
+}
+
+.userBusinessInfo {
+	background: #fdf7ef;
+    padding: 15px;
+    margin: 0px;
+    border: 2px solid #000;
+}
+
+.submitForm {
+	text-align: center;
+    background-color: #fdf7ef;
+    border: 2px solid #000;
+    padding: 15px;
+    margin: 0px;
+
+}
+
+.button {
+	font-size: 1.5em;
+}
+
+header {
+    display: block;
+    margin: 0px;
+    padding: 5px;
+    border: 2px solid #000;
+    background: #add8e6;
+    font-size: 250%;
+    font-weight: bold;
+    text-align: center;
+}
+
+footer {
+    display: block;
+    margin: 0px;
+    padding: 5px;
+    border: 2px solid #000;
+    background: #add8e6;
+    font-size: 90%;
+    font-weight: italic;
+    text-align: left;
+}
