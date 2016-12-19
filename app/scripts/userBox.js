@@ -55,14 +55,14 @@ module.exports = React.createClass({
   // Use AJAX to submit the form to the server
   handleUserSubmit: function(user) {
 	  user.preventDefault();
-	  
+
 	  var email = this.state.email.trim();
 	  var name = this.state.name.trim();
 	  if (!email || !name || this.state.jobsChecked.length == 0) {
 		  alert("Please be sure to fill out your name, email, and check at least one job.");
 	  }
 	  else {
-	  
+
 		$.ajax({
 			url: this.props.put_url,
 			dataType: 'json',
@@ -70,7 +70,8 @@ module.exports = React.createClass({
 			data: this.state
 		})
 		.done(function(data){
-			alert("Thank you! Your data has succesfully been entered into the database.");
+			// alert("Thank you! Your data has succesfully been entered into the database.");
+      window.location = '/';
 		}.bind(this))
 		.fail(function(xhr, status, err) {
 			alert("There was a problem. Data was not succesfully entered.");
@@ -78,7 +79,7 @@ module.exports = React.createClass({
 		}.bind(this));
 	  }
 	},
-  
+
   // Use to AJAX to get jobs from the server
   loadJobsFromServer: function() {
       $.ajax({
@@ -88,19 +89,19 @@ module.exports = React.createClass({
       })
       .done(function(result){
           this.setState({ data1: result.splice(0, (Math.ceil(result.length)) / 2),
-								data2:  result });	  
+								data2:  result });
       }.bind(this))
       .fail(function(xhr, status, errorThrown) {
           console.error(this.props.url, status, err.toString());
       }.bind(this));
   },
-  
+
   // Called automatically by React after a component is rendered for the first time
     componentDidMount: function() {
         this.loadJobsFromServer();
         setInterval(this.loadJobsFromServer, this.props.pollInterval);
     },
-  
+
   // Render method for this React class
   render: function() {
     return (
